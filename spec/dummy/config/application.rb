@@ -7,6 +7,23 @@ require "action_view/railtie"
 require "action_mailer/railtie"
 
 Bundler.require
+
+#
+# We must call this after requiring action_controller
+# But also before requiring oauned.
+# So, as unclean it may seem, it's the best place.
+#
+class ActionController::Base
+  #
+  # We need that current_user method to include the controllers
+  # In any other application, this method would be included by the authentication plugin, whichether it is.
+  #
+  def current_user
+    @current_user
+  end
+end
+
+
 require "oauned"
 
 module Dummy
