@@ -1,3 +1,5 @@
+require 'oauned/rails/routing'
+
 module Oauned
   class Engine < ::Rails::Engine
     # Force routes to be loaded if we are doing any eager load.

@@ -1,4 +1,10 @@
 Dummy::Application.routes.draw do
+  oauned_routing
+  
+  scope '/scoped' do
+    oauned_routing
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
