@@ -12,7 +12,7 @@ module Oauned::Models::Authorization
 
       def tokenize!
         self.destroy
-        Connection.create!(:user_id => user.id, :application_id => application.id)
+        Connection.create!(:user_id => user_id, :application_id => application_id)
       end
 
       private
