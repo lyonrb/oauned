@@ -29,5 +29,13 @@ describe Oauned::OauthController do
         post :authorize, :client_id => application.id, :redirect_uri => application.redirect_uri
       end.should change(Authorization, :count).by(1)
     end
+    
+    it "should redirect if the user is not logged in" do
+      @controller.current_user = nil
+      lambda do
+        post :authorize, :client_id => application.id, :redirect_uri => application.redirect_uri
+      end.should change(Authorization, :count).by(0)
+      response.should be_redirect
+    end
   end
 end

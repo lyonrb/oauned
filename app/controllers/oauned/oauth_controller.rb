@@ -92,6 +92,7 @@ class Oauned::OauthController < ApplicationController
   end
   
   def oauned_check_authentication
-    !!current_user
+    return if !!current_user
+    redirect_to self.respond_to?(:new_user_session_url) ? new_user_session_url : '/'
   end
 end

@@ -28,5 +28,11 @@ describe Oauned::OauthController do
       get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
       response.should be_success
     end
+    
+    it "should redirect if the user is not logged in" do
+      @controller.current_user = nil
+      get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
+      response.should be_redirect
+    end
   end
 end
