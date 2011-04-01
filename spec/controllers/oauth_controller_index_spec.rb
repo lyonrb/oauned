@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'cgi'
 
 describe Oauned::OauthController do
   let(:application) { Application.create!(:redirect_uri => 'http://www.example.net') }
@@ -33,6 +34,13 @@ describe Oauned::OauthController do
       @controller.current_user = nil
       get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
       response.should be_redirect
+    end
+    
+    it 'should set the current uri in the session' do
+      @controller.current_user = nil
+      get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
+      response.should be_redirect
+      session[:redirect_uri].should eql("/?client_id=#{application.id}&redirect_uri=#{CGI.escape(application.redirect_uri)}")
     end
   end
 end
