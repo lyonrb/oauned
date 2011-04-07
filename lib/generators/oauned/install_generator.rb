@@ -14,7 +14,7 @@ module Oauned
       
       def create_models
         [:application, :authorization, :connection].each do |model|
-          invoke "active_record:model", [model], :migration => false unless model_exists?(model) && behavior == :invoke
+          invoke "active_record:model", [model.to_s], :migration => false unless model_exists?(model) && behavior == :invoke
         end
       end
       
