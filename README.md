@@ -2,6 +2,11 @@
 
 Rails Engine that lets you become an OAuth Provider.
 
+## THIS IS UNDER DEVELOPMENT
+
+I wouldn't recommend using the published gems (they're buggy). And I won't release anything until I have something stable in my end.  
+So if you wish to give oauned a try, please add the git repo in your Gemfile.
+
 ## Installation
 
 You can use the latest gem which is on rubygems.
