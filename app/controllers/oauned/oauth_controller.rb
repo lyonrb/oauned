@@ -6,6 +6,11 @@ class Oauned::OauthController < ApplicationController
   
   def index
     return unless validate_params
+    ## 
+    # If the application has the no_confirmation attribute set to true, we don't ask for confirmation.
+    # See https://github.com/dmathieu/oauned/wiki/Skip-Authorization
+    #
+    return authorize if @client.respond_to?(:no_confirmation) && @client.no_confirmation
   end
   
   def authorize
@@ -27,14 +32,14 @@ class Oauned::OauthController < ApplicationController
     #  return
     #end
     
-    client = Application.find params[:client_id]
-    if client.nil? || client.consumer_secret != params[:client_secret]
+    @client = Application.find params[:client_id]
+    if @client.nil? || @client.consumer_secret != params[:client_secret]
       render :status => :bad_request,
         :json => {:error => 'invalid-client-credentials', :error_description => 'Invalid client credentials!'}
       return
     end
     
-    if params[:redirect_uri].nil? || URI.parse(client.redirect_uri).host != URI.parse(params[:redirect_uri]).host
+    if params[:redirect_uri].nil? || URI.parse(@client.redirect_uri).host != URI.parse(params[:redirect_uri]).host
       render :status => :bad_request,
         :json => {:error => 'invalid-grant', :error_description => 'Redirect uri mismatch!'}
       return
@@ -42,7 +47,7 @@ class Oauned::OauthController < ApplicationController
     
     if params[:grant_type] == 'refresh-token'
       original_token = Connection.where(:refresh_token => params[:refresh_token]).first
-      if original_token.nil? || original_token.application_id != client.id
+      if original_token.nil? || original_token.application_id != @client.id
         render :status => :bad_request,
           :json => {:error => 'invalid-grant', :error_description => 'Refresh token is invalid!'}
         return
@@ -50,7 +55,7 @@ class Oauned::OauthController < ApplicationController
       token = original_token.refresh
     else
       authorization = Authorization.where(:code => params[:code]).first
-      if authorization.nil? || authorization.expired? || authorization.application_id != client.id
+      if authorization.nil? || authorization.expired? || authorization.application_id != @client.id
         render :status => :bad_request,
           :json => {:error => 'invalid-grant', :error_description => "Authorization expired or invalid!"}
         return
