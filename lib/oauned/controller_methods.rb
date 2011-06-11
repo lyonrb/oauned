@@ -28,7 +28,7 @@ module Oauned
         
         private
         def user_from_oauth
-          token = Connection.where(:access_token => params[:access_token]).first
+          token = Connection.where(['access_token LIKE ?', params[:access_token]]).first
           token.user if (token && !token.expired?)
         end
         
