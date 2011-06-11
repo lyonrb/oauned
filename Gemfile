@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.3"
+gem "rails", :git => 'https://github.com/rails/rails.git'
 gem "capybara", ">= 0.4.0"
 gem "sqlite3-ruby", :require => "sqlite3"
 
@@ -9,8 +9,8 @@ gem "sqlite3-ruby", :require => "sqlite3"
 # gem 'ruby-debug19'
 
 group :test do
-  gem "rspec", '2.3.0'
-	gem "rspec-rails", '2.3.0'
+  gem "rspec"
+	gem "rspec-rails"
 	gem 'mocha'
 	gem 'timecop', :git => 'http://github.com/jtrupiano/timecop.git'
 end
