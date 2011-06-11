@@ -5,5 +5,5 @@ Gem::Specification.new do |s|
   s.summary = "Oauth Provider"
   s.description = "Rails Engine to be an Oauth Provider"
   s.files = Dir["lib/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 end
