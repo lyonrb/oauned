@@ -1,6 +1,7 @@
 # Oauned
 
 Rails Engine that lets you become an OAuth Provider.
+[![Travis](http://travis-ci.org/dmathieu/oauned.png)](http://travis-ci.org/dmathieu/oauned)
 
 ## THIS IS UNDER DEVELOPMENT
 
