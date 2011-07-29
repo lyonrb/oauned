@@ -18,6 +18,7 @@ module Oauned::Models::Connection
       private
       def set_default
         self.access_token = SecureRandom.hex(20)
+        self.refresh_token = SecureRandom.hex(20)
         self.expires_at = 1.hour.from_now
       end
     end
