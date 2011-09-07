@@ -22,16 +22,6 @@ class Oauned::OauthController < ApplicationController
   end
 
   def token
-    #
-    # Deactivated for now
-    # It seems if we don't have any, it's an autorization-code
-    #
-    #unless ['authorization-code', 'refresh-token'].include?(params[:grant_type])
-    #  render :status => :bad_request,
-    #    :json => {:error => 'unsupported-grant-type', :error_description => "Grant type #{params[:grant_type]} is not supported!"}
-    #  return
-    #end
-
     @client = Application.find params[:client_id]
     if @client.nil? || @client.consumer_secret != params[:client_secret]
       render :status => :bad_request,
@@ -75,11 +65,6 @@ class Oauned::OauthController < ApplicationController
       render :text => "You did not specify the 'client_id' parameter!", :status => :bad_request
       return false
     end
-
-    #unless ['code'].include?(params[:response_type])
-    #  redirect_to "#{params[:redirect_uri]}?error=unsupported-response-type"
-    #  return
-    #end
 
     if params[:redirect_uri].blank?
       render :text => "You did not specify the 'redirect_uri' parameter!", :status => :bad_request

@@ -11,22 +11,6 @@ describe Oauned::OauthController do
   end
 
   describe 'token' do
-    #it 'should have a grant-type' do
-    #  post :token
-    #  response.status.should eql(400)
-    #  response.body.should eql({
-    #    :error => 'unsupported-grant-type',
-    #    :error_description => "Grant type  is not supported!"}.to_json)
-    #end
-
-    #it 'should have a valid grant-type' do
-    #  post :token, :grant_type => 'testing'
-    #  response.status.should eql(400)
-    #  response.body.should eql({
-    #    :error => 'unsupported-grant-type',
-    #    :error_description => "Grant type testing is not supported!"}.to_json)
-    #end
-
     it 'should have a client_id' do
       lambda do
         post :token,
