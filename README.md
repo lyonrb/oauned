@@ -1,29 +1,25 @@
 # Oauned
 
 Rails Engine that lets you become an OAuth Provider.
-[![Travis](http://travis-ci.org/dmathieu/oauned.png)](http://travis-ci.org/dmathieu/oauned)
-
-## THIS IS UNDER DEVELOPMENT
-
-I wouldn't recommend using the published gems (they're buggy). And I won't release anything until I have something stable in my end.  
-So if you wish to give oauned a try, please add the git repo in your Gemfile.
+[![Travis](https://secure.travis-ci.org/evome/oauned.png)](http://travis-ci.org/evome/oauned)
 
 ## Installation
 
-You can use the latest gem which is on rubygems.
+Add this to your Gemfile :
 
-    gem install oauned
+    gem 'oauned'
+    gem 'devise'
 
-Don't forget to add it to your Gemfile !
+Then, you must execute the generators :
 
-Then, you must create the local models.
-
+    rails g devise:install
+    rails g devise user
     rails g oauned:install
 
-This will create three models in your application : `Application`, `Authorization`, `Connection`  
-You'll need a fourth one, which is not created : `User`. The authentication management gem you're using should be creating it, not us.
+This will create three models in your application : `Application`, `Authorization`, `Connection`.  
+Devise will also create a fourth one : `User`.
 
-You can easily rename those models. Just change their name and the relations names between them.
+You can't currently rename those models and hope for oauned to keep working. This is something we intend to do though.
 
 A route is also created.
 
@@ -70,11 +66,11 @@ We're open to any contribution. It has to be tested properly though.
 * [Fork](http://help.github.com/forking/) the project
 * Do your changes and commit them to your repository
 * Test your changes. We won't accept any untested contributions (except if they're not testable).
-* Create an [issue](https://github.com/dmathieu/oauned/issues) with a link to your commits.
+* Create an [issue](https://github.com/evome/oauned/issues) with a link to your commits.
 
 ## Maintainers
 
-* Damien MATHIEU (http://github.com/dmathieu)
+* Damien MATHIEU ([github/dmathieu](http://github.com/dmathieu), [dmathieu.com](http://dmathieu.com))
 
 ## License
-MIT License. Copyright 2010 Damien MATHIEU. http://dmathieu.com
+MIT License. Copyright 2010 Evome. http://evome.fr
