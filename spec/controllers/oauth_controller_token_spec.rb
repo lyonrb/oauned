@@ -12,18 +12,19 @@ describe Oauned::OauthController do
 
   describe 'token' do
     it 'should have a client_id' do
-      lambda do
-        post :token,
-          :grant_type => 'authorization-code'
-      end.should raise_error ActiveRecord::RecordNotFound
+      post :token,
+        :grant_type => 'authorization-code'
+      response.status.should eql(400)
+      response.body.should eql({:error => 'invalid-client-credentials', :error_description => 'Invalid client credentials'}.to_json)
     end
 
     it 'should have a client_secret' do
       post :token,
         :grant_type => 'authorization-code',
-        :client_id => application.id
+        :client_id => application.id,
+        :redirect_uri => 'http://example.com'
       response.status.should eql(400)
-      response.body.should eql({:error => 'invalid-client-credentials', :error_description => 'Invalid client credentials!'}.to_json)
+      response.body.should eql({:error => 'invalid-client-credentials', :error_description => 'Invalid client credentials'}.to_json)
     end
     it 'should have a valid client_secret' do
       post :token,
@@ -31,7 +32,7 @@ describe Oauned::OauthController do
         :client_id => application.id,
         :client_secret => 'testing'
       response.status.should eql(400)
-      response.body.should eql({:error => 'invalid-client-credentials', :error_description => 'Invalid client credentials!'}.to_json)
+      response.body.should eql({:error => 'invalid-client-credentials', :error_description => "Invalid client credentials"}.to_json)
     end
 
     it 'should have a redirect_uri' do
@@ -40,7 +41,7 @@ describe Oauned::OauthController do
         :client_id => application.id,
         :client_secret => application.consumer_secret
       response.status.should eql(400)
-      response.body.should eql({:error => 'invalid-grant', :error_description => 'Redirect uri mismatch!'}.to_json)
+      response.body.should eql({:error => 'invalid-redirect-uri', :error_description => "You did not specify the 'redirect_uri' parameter"}.to_json)
     end
 
     it 'should have a valid redirect_uri' do
@@ -50,7 +51,7 @@ describe Oauned::OauthController do
         :client_secret => application.consumer_secret,
         :redirect_uri => 'http://www.example.com'
       response.status.should eql(400)
-      response.body.should eql({:error => 'invalid-grant', :error_description => 'Redirect uri mismatch!'}.to_json)
+      response.body.should eql({:error => 'redirect-uri-mismatch', :error_description => 'The redirect_uri mismatch the one in the application'}.to_json)
     end
 
     describe 'authorization-code' do
@@ -63,7 +64,7 @@ describe Oauned::OauthController do
           :redirect_uri => application.redirect_uri,
           :code => authorization.code
         response.status.should eql(400)
-        response.body.should eql({:error => 'invalid-grant', :error_description => "Authorization expired or invalid!"}.to_json)
+        response.body.should eql({:error => 'invalid-grant', :error_description => "Authorization expired or invalid"}.to_json)
       end
 
       it 'should have an authorization for the application' do
@@ -75,7 +76,7 @@ describe Oauned::OauthController do
           :redirect_uri => application.redirect_uri,
           :code => authorization.code
         response.status.should eql(400)
-        response.body.should eql({:error => 'invalid-grant', :error_description => "Authorization expired or invalid!"}.to_json)
+        response.body.should eql({:error => 'invalid-grant', :error_description => "Authorization expired or invalid"}.to_json)
       end
 
       it 'should create the token' do
@@ -101,7 +102,7 @@ describe Oauned::OauthController do
           :redirect_uri => application.redirect_uri,
           :refresh_token => token.refresh_token
         response.status.should eql(400)
-        response.body.should eql({:error => 'invalid-grant', :error_description => 'Refresh token is invalid!'}.to_json)
+        response.body.should eql({:error => 'invalid-grant', :error_description => 'Refresh token is invalid'}.to_json)
       end
 
       it 'should destroy the current token' do
