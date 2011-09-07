@@ -12,6 +12,7 @@ gem "sqlite3-ruby",
 group :test do
   gem "rspec"
   gem "rspec-rails"
+  gem "generator_spec"
   gem 'mocha'
   gem 'timecop', :git => 'http://github.com/jtrupiano/timecop.git'
 end
