@@ -40,6 +40,22 @@ describe Oauned::Generators::InstallGenerator do
           contains "scope '/scoped' { oauned_routing }"
         end
       end
+
+      directory "db" do
+        directory "migrate" do
+          migration "oauned_create_foo" do
+            contains "create_table(:foos) do |t|"
+          end
+
+          migration "oauned_create_bar" do
+            contains "create_table(:bars) do |t|"
+          end
+
+          migration "oauned_create_doe" do
+            contains "create_table(:does) do |t|"
+          end
+        end
+      end
     }
   end
 
