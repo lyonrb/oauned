@@ -1,5 +1,7 @@
 module Oauned::Models::Application
   def self.included(klass)
+    Oauned::Models['application'] = klass
+
     klass.class_eval do
       before_create    :set_default
 

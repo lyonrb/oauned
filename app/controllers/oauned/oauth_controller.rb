@@ -21,13 +21,13 @@ class Oauned::OauthController < ApplicationController
 
   def token
     if refresh_token?
-      original_token = Connection.where(['refresh_token LIKE ?', params[:refresh_token]]).first
+      original_token = Oauned::Models['connection'].where(['refresh_token LIKE ?', params[:refresh_token]]).first
       if original_token.nil? || original_token.application_id != client.id
         return render_error("Refresh token is invalid", "invalid-grant")
       end
       token = original_token.refresh
     else
-      authorization = Authorization.where(['code LIKE ?', params[:code]]).first
+      authorization = Oauned::Models['authorization'].where(['code LIKE ?', params[:code]]).first
       if authorization.nil? || authorization.expired? || authorization.application_id != client.id
         return render_error("Authorization expired or invalid", "invalid-grant")
       end
@@ -43,7 +43,7 @@ class Oauned::OauthController < ApplicationController
 
   private
   def client
-    @client ||= Application.find params[:client_id]
+    @client ||= Oauned::Models['application'].find params[:client_id]
   end
 
   def validate_params

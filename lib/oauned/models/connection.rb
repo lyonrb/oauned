@@ -1,5 +1,7 @@
 module Oauned::Models::Connection
   def self.included(klass)
+    Oauned::Models['connection'] = klass
+
     klass.class_eval do
       before_create    :set_default
 

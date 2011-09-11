@@ -1,5 +1,7 @@
 module Oauned::Models::Authorization
   def self.included(klass)
+    Oauned::Models['authorization'] = klass
+
     klass.class_eval do
       before_create    :set_default
 
