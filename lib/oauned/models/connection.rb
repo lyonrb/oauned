@@ -3,7 +3,8 @@ module Oauned::Models::Connection
     Oauned::Models['connection'] = klass
 
     klass.class_eval do
-      before_create    :set_default
+      before_validation    :set_default,
+        :on => :create
 
       def expires_in
         (expires_at - Time.now).to_i
@@ -14,7 +15,7 @@ module Oauned::Models::Connection
 
       def refresh
         self.destroy
-        Connection.create!(:user_id => user.id, :application_id => application.id)
+        self.class.create!(:user_id => user.id, :application_id => application.id)
       end
 
       private

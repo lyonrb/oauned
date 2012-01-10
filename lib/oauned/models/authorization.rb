@@ -3,7 +3,8 @@ module Oauned::Models::Authorization
     Oauned::Models['authorization'] = klass
 
     klass.class_eval do
-      before_create    :set_default
+      before_validation    :set_default,
+        :on => :create
 
       def expires_in
         (expires_at - Time.now).to_i
@@ -14,7 +15,7 @@ module Oauned::Models::Authorization
 
       def tokenize!
         self.destroy
-        Connection.create!(:user_id => user_id, :application_id => application_id)
+        Oauned::Models['connection'].create!(:user_id => user_id, :application_id => application_id)
       end
 
       private

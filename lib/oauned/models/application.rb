@@ -3,10 +3,11 @@ module Oauned::Models::Application
     Oauned::Models['application'] = klass
 
     klass.class_eval do
-      before_create    :set_default
+      before_validation    :set_default,
+        :on => :create
 
       def authorize!(user)
-        Authorization.create!(:user_id => user.id, :application_id => id)
+        Oauned::Models['authorization'].create!(:user_id => user.id, :application_id => id)
       end
 
       private
