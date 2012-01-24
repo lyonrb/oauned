@@ -8,20 +8,6 @@ require "action_mailer/railtie"
 
 Bundler.require
 
-#
-# We must call this after requiring action_controller
-# But also before requiring oauned.
-# So, as unclean it may seem, it's the best place.
-#
-class ActionController::Base
-  #
-  # We need that current_user method to include the controllers
-  # In any other application, this method would be included by the authentication plugin, whichether it is.
-  #
-  def current_user
-    @current_user
-  end
-end
 
 
 require "oauned"
@@ -50,13 +36,16 @@ module Dummy
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # JavaScript files you want as :defaults (application.js is always included).
-    # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
   end
 end

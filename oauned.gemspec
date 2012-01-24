@@ -8,4 +8,7 @@ Gem::Specification.new do |s|
   s.files = Dir["app/**/*", "lib/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.authors = ["Damien MATHIEU"]
   s.version = Oauned::VERSION
+
+  s.add_dependency('rails', "~> 3.1")
+  s.add_dependency('devise', ">= 1.5")
 end

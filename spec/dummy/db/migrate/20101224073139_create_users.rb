@@ -1,14 +1,12 @@
 # encoding: UTF-8
 class CreateUsers < ActiveRecord::Migration
-  def self.up
+  def change
     create_table(:users) do |t|
-      t.string :email
+      ## Database authenticatable
+      t.string :email,              :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => ""
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :users
   end
 end

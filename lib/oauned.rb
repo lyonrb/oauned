@@ -6,3 +6,4 @@ module Oauned
 end
 
 require 'oauned/rails'
+require 'oauned/devise'

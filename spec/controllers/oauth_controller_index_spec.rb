@@ -2,13 +2,14 @@ require 'spec_helper'
 require 'cgi'
 
 describe Oauned::OauthController do
+  include Devise::TestHelpers
   render_views
 
   let(:application) { Application.create!(:redirect_uri => 'http://www.example.net', :name => "My Application") }
   let(:user) { User.create!}
 
   before :each do
-    @controller.current_user = user
+    sign_in user
   end
 
   describe 'index' do
@@ -46,13 +47,13 @@ describe Oauned::OauthController do
     end
 
     it "should redirect if the user is not logged in" do
-      @controller.current_user = nil
+      sign_out user
       get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
       response.should be_redirect
     end
 
     it 'should set the current uri in the session' do
-      @controller.current_user = nil
+      sign_out user
       get :index, :client_id => application.id, :redirect_uri => application.redirect_uri
       response.should be_redirect
       session[:redirect_uri].should eql("/?client_id=#{application.id}&redirect_uri=#{CGI.escape(application.redirect_uri)}")

@@ -1,13 +1,15 @@
 require 'spec_helper'
 
 describe Oauned::OauthController do
+  include Devise::TestHelpers
+
   let(:application) { Application.create!(:redirect_uri => 'http://www.example.net') }
   let(:user) { User.create!}
   let(:authorization) { Authorization.create!(:user_id => user.id, :application_id => application.id)}
   let(:token) { Connection.create!(:application_id => application.id, :user_id => user.id, :refresh_token => 'testing_' + rand.to_s)}
 
-  before :each do
-    @controller.current_user = user
+  before do
+    sign_in user
   end
 
   describe 'token' do
