@@ -17,21 +17,6 @@ module Oauned
           self.oauth_options_proc = block
         end
 
-        def oauth_user
-          @oauth_user ||= oauth_allowed? ? user_from_oauth : nil
-        end
-
-        alias :normal_user :current_user
-        def current_user
-          normal_user || oauth_user
-        end
-
-        private
-        def user_from_oauth
-          token = Oauned::Models['connection'].where(['access_token LIKE ?', params[:access_token]]).first
-          token.user if (token && !token.expired?)
-        end
-
         def oauth_allowed?
           return true if (oauth_options_proc && !oauth_options_proc.call(self)) || oauth_options.nil?
           return false if oauth_options.empty?

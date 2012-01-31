@@ -6,5 +6,7 @@ Dummy::Application.routes.draw do
     oauned_routing
   end
 
+  get '/me' => 'home#me'
+
   root :to => 'home#index'
 end

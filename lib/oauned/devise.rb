@@ -1,15 +1,10 @@
 require 'devise'
+Devise.add_module :oauthable,
+  :model => 'oauned/models/oauthable',
+  :strategy => true
 
-module Devise
-
-  class << self
-    alias :old_include_helpers :include_helpers
-    def include_helpers(scope)
-      old_include_helpers(scope)
-
-      ActiveSupport.on_load(:action_controller) do
-        include Oauned::ControllerMethods
-      end
-    end
+Devise.setup do |config|
+  config.warden do |manager|
+    manager.default_strategies(:scope => :user).unshift(:oauthable)
   end
 end

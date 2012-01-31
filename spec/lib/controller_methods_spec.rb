@@ -61,50 +61,6 @@ describe Oauned::ControllerMethods do
     end
   end
 
-  describe 'oauth_user' do
-    it 'should have the method' do
-      @controller.respond_to?(:oauth_user).should eql(true)
-    end
-
-    it 'should return the user' do
-      token.update_attribute(:access_token, 'abcdefghij')
-      @controller.send(:oauth_user).should eql(token.user)
-    end
-
-    it 'should not return if not allowed' do
-      token.update_attribute(:access_token, 'abcdefghij')
-      OauthFakeControllerMethods.deny_oauth
-      @controller.send(:current_user).should be_nil
-    end
-  end
-
-  describe 'current_user' do
-    it 'should return the normal user' do
-      @controller.expects(:normal_user).returns(token.user)
-      @controller.send(:current_user).should eql(token.user)
-    end
-
-    it 'should return the oauth user' do
-      token.update_attribute(:access_token, 'abcdefghij')
-      @controller.send(:current_user).should eql(token.user)
-    end
-
-    it 'should not return any user' do
-      @controller.send(:current_user).should be_nil
-    end
-  end
-
-  describe 'user_from_oauth' do
-    it 'should not find any user' do
-      OauthFakeControllerMethods.new.send(:user_from_oauth).should be_nil
-    end
-
-    it 'should return the user' do
-      token.update_attribute(:access_token, 'abcdefghij')
-      OauthFakeControllerMethods.new.send(:user_from_oauth).should eql(token.user)
-    end
-  end
-
   describe 'oauth_allowed?' do
     it 'should allow oauth by default' do
       @controller.send(:oauth_allowed?).should eql(true)
