@@ -1,9 +1,6 @@
-module Oauned
-  autoload :ControllerMethods, 'oauned/controller_methods'
-  autoload :Models, 'oauned/models'
-  autoload :Version, 'oauned/version'
-
-end
-
-require 'oauned/rails'
+require 'oauned/controller_methods'
+require 'oauned/models'
+require 'oauned/version'
+require 'oauned/strategy'
 require 'oauned/devise'
+require 'oauned/rails'

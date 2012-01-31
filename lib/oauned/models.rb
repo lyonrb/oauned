@@ -1,8 +1,4 @@
 module Oauned::Models
-  autoload :Application, 'oauned/models/application'
-  autoload :Authorization, 'oauned/models/authorization'
-  autoload :Connection, 'oauned/models/connection'
-
 
   @@models = {}
   def self.[](key)
@@ -13,3 +9,8 @@ module Oauned::Models
     @@models[key] = value
   end
 end
+
+require 'oauned/models/application'
+require 'oauned/models/authorization'
+require 'oauned/models/connection'
+require 'oauned/models/oauthable'
