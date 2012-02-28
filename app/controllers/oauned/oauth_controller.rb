@@ -89,6 +89,6 @@ class Oauned::OauthController < ApplicationController
   end
 
   def refresh_token?
-    params[:grant_type] == 'refresh-token'
+    params[:grant_type] == 'refresh_token'
   end
 end

@@ -98,7 +98,7 @@ describe Oauned::OauthController do
       it 'should have a token for the application' do
         token.update_attribute(:application_id, 0)
         post :token,
-          :grant_type => 'refresh-token',
+          :grant_type => 'refresh_token',
           :client_id => application.id,
           :client_secret => application.consumer_secret,
           :redirect_uri => application.redirect_uri,
@@ -109,7 +109,7 @@ describe Oauned::OauthController do
 
       it 'should destroy the current token' do
         post :token,
-          :grant_type => 'refresh-token',
+          :grant_type => 'refresh_token',
           :client_id => application.id,
           :client_secret => application.consumer_secret,
           :redirect_uri => application.redirect_uri,
@@ -120,7 +120,7 @@ describe Oauned::OauthController do
       it 'should create a new token' do
         lambda do
           post :token,
-            :grant_type => 'refresh-token',
+            :grant_type => 'refresh_token',
             :client_id => application.id,
             :client_secret => application.consumer_secret,
             :redirect_uri => application.redirect_uri,
