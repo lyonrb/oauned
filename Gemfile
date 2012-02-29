@@ -2,7 +2,8 @@ source "http://rubygems.org"
 gemspec
 
 gem "rails",
-  :git => 'https://github.com/rails/rails.git'
+  :git => 'https://github.com/rails/rails.git',
+:branch => '3-2-stable'
 gem "devise",
   :git => 'https://github.com/plataformatec/devise.git'
 gem "sqlite3-ruby",
