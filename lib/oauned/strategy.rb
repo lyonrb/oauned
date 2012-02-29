@@ -18,7 +18,7 @@ module Oauned
     end
 
     def access_token
-      match = request.env['Authorization'].match(/^OAuth2 (.*)$/) if request.env['Authorization']
+      match = request.authorization.match(/^OAuth2 (.*)$/) if request.authorization
       match.nil? ? nil : match[1]
     end
   end
