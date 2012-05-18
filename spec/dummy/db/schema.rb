@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20101224131425) do
     t.boolean  "no_confirmation",               :default => false
     t.string   "consumer_secret"
     t.string   "redirect_uri"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
   end
 
   create_table "authorizations", :force => true do |t|
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20101224131425) do
     t.integer  "application_id"
     t.string   "code"
     t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "connections", :force => true do |t|
@@ -38,15 +38,15 @@ ActiveRecord::Schema.define(:version => 20101224131425) do
     t.string   "access_token"
     t.string   "refresh_token"
     t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email",              :default => "", :null => false
     t.string   "encrypted_password", :default => "", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
 end
