@@ -1,7 +1,7 @@
 # Oauned
 
 Rails Engine that lets you become an OAuth Provider.
-[![Travis](https://secure.travis-ci.org/evome/oauned.png)](http://travis-ci.org/evome/oauned)
+[![Travis](https://secure.travis-ci.org/lyonrb/oauned.png)](http://travis-ci.org/lyonrb/oauned)
 
 ## Installation
 
@@ -66,11 +66,11 @@ We're open to any contribution. It has to be tested properly though.
 * [Fork](http://help.github.com/forking/) the project
 * Do your changes and commit them to your repository
 * Test your changes. We won't accept any untested contributions (except if they're not testable).
-* Create an [issue](https://github.com/evome/oauned/issues) with a link to your commits.
+* Create an [issue](https://github.com/lyonrb/oauned/issues) with a link to your commits.
 
 ## Maintainers
 
 * Damien MATHIEU ([github/dmathieu](http://github.com/dmathieu), [dmathieu.com](http://dmathieu.com))
 
 ## License
-MIT License. Copyright 2010 Evome. http://evome.fr
+MIT License. Copyright 2010 LyonRB. http://lyonrb.fr
